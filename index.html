@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>
+      Frontend Mentor | Newsletter sign-up form with success message
+    </title>
+
+    <link rel="stylesheet" href="./style.css" />
+    <script type="text/javascript" src="functions.js"></script>
+    <script type="text/javascript">
+      window.onload = function () {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const email = urlParams.get("email");
+        if(email) {
+          const signupDialog = document.getElementsByClassName("signup-dialog")[0];
+          signupDialog.classList.toggle("hidden");
+          const signupSuccess = document.getElementById("signup-success");
+          signupSuccess.classList.toggle("hidden");
+          document.getElementById("success-message-email").innerHTML = email;
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Sign-up form start -->
+    <!-- Mobile first approach -->
+    <main>
+      <div class="signup-dialog">
+        <img
+          class="signup-form-img"
+          src="./assets/images/illustration-sign-up-mobile.svg"
+        />
+
+        <div class="flex-item dialog-text">
+          <h2>Stay updated!</h2>
+          Join 60,000+ product managers receiving monthly updates on:
+
+          <ul>
+            <li>Product discovery and building what matters</li>
+            <li>Measuring to ensure updates are a success</li>
+            <li>And much more!</li>
+          </ul>
+
+          <form name="signup_form" class="sign-up-form">
+            <div class="signup-form-label">
+              <label for="email">Email address</label>
+              <div hidden class="invalid-email-msg">Valid email required</div>
+            </div>
+            <input id="email" name="email" placeholder="email@company.com" />
+
+            <button
+              class="confirm-button"
+              type="button"
+              onclick="ValidateEmail(document.signup_form.email)"
+            >
+              Subscribe to monthly newsletter
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- Sign-up form end -->
+      <div id="signup-success" class="signup-dialog hidden">
+        <!-- Success message start -->
+        <img src="./assets/images/icon-success.svg" />
+        <h2>Thanks for subscribing!</h2>
+        <div class="confirmation-msg">
+          A confirmation email has been sent to
+          <span id="success-message-email">ash@loremcompany.com</span>. Please
+          open it and click the button inside to confirm your subscription.
+        </div>
+        <form style="width: 100%" action="index.html">
+          <button class="confirm-button" type="submit">Dismiss message</button>
+        </form>
+
+        <!-- Success message end -->
+      </div>
+    </main>
+  </body>
+</html>
